@@ -120,6 +120,15 @@ static void *l1_map[V_L1_SIZE];
 /* code generation context */
 TCGContext tcg_ctx;
 
+/* This indicates to the front-ends if code needs to be generated that takes
+ * into account multiple threads of execution.  It will be true for user-only
+ * after the first thread clone, and for system mode if MTTCG is enabled.
+ * On transition from false->true, any code generated while false needs to
+ * be invalidated.  It may be temporarily set to false when generating code
+ * in an exclusive context.
+ */
+bool parallel_cpus;
+
 /* translation block context */
 #ifdef CONFIG_USER_ONLY
 __thread int have_tb_lock;
