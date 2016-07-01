@@ -127,7 +127,7 @@ TCGContext tcg_ctx;
  * be invalidated.  It may be temporarily set to false when generating code
  * in an exclusive context.
  */
-bool parallel_cpus;
+bool parallel_cpus = true;
 
 /* translation block context */
 #ifdef CONFIG_USER_ONLY
